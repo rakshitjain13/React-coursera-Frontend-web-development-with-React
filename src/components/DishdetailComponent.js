@@ -5,17 +5,24 @@ import { Card, CardImg, CardText, CardBody,Button,
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function RenderDish({dish}){
     if (dish != null) {
         return(
+          <FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
             <Card>
-                <CardImg width="100%" src={baseUrl+dish.image} alt={dish.name} />
+                <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                 <CardBody>
                     <CardTitle>{dish.name}</CardTitle>
                     <CardText>{dish.description}</CardText>
                 </CardBody>
             </Card>
+            </FadeTransform>
         )
     }
     else{
@@ -37,21 +44,22 @@ function RenderDish({dish}){
     function  RenderComments({comments,postComment,dishId}){
         if (comments != null) {
 
-            let list = comments.map((comments)=>{
+            let list =<Stagger in>{ comments.map((comments)=>{
 
                 let date = comments.date
                 // console.log(this.formatDate({date}))
 
                 return(
 
+                         <Fade in>
                     <li key={comments.id} >
                         <p>{comments.comment}</p>
                         <p>--{comments.author},{formatDate({date})}</p>
                     </li>
-
+                        </Fade>
 
                 )
-            })
+            })}</Stagger>
 
             return(
                 <div>
