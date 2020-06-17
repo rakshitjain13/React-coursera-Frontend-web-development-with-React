@@ -46,7 +46,7 @@ function RenderDish({dish}){
 
             let list =<Stagger in>{ comments.map((comments)=>{
 
-                let date = comments.date
+                let date = comments.date;
                 // console.log(this.formatDate({date}))
 
                 return(
